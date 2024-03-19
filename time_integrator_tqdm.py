@@ -2,8 +2,8 @@
 Uses the tqdm package to wrap solution generators from the
 TimeIntegrator class.
 """
-from time_integrator import TimeIntegrator
-from time_domain import TimeDomain
+from .time_integrator import TimeIntegrator
+from .time_domain import TimeDomain
 
 from tqdm import tqdm
 
