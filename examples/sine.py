@@ -17,7 +17,7 @@ from tqdm import tqdm
 # define the system and parameters
 x0 = 0
 y0 = 1
-t0, tf = 0, 3.5 * np.pi
+t0, tf = 0, 12
 
 A = np.array(
     [
@@ -41,7 +41,7 @@ def exact(t):  # exact solution for testing
 max_time_step = 1e-3
 time = TimeDomain_Start_Stop_MaxSpacing(t0, tf, max_time_step)
 # solver = RK4()
-solver = AB4(seed=RK4(), seed_steps=1)
+solver = AB4(seed=RK4(), seed_steps_per_step=1)
 xs = np.array([u[0] for u in solver.solve(u0, rhs, time)])
 fig, (ax_sol, ax_err) = plt.subplots(2, 1, sharex=True)
 ax_sol.plot(time.array, xs, label=solver.name)
@@ -58,11 +58,11 @@ max_time_step = 3e-2
 time = TimeDomain_Start_Stop_MaxSpacing(t0, tf, max_time_step)
 solvers = [
     Euler(),
-    AB2(seed=Euler(), seed_steps=2),
+    AB2(seed=Euler(), seed_steps_per_step=2),
     RK4(),
-    AB4(seed=RK4(), seed_steps=1),
+    AB4(seed=RK4(), seed_steps_per_step=1),
 ]
-colors = ["blue", "green", "red"]
+colors = ["blue", "green", "red", "cyan"]
 
 plt.ion()
 fig, (ax_sol, ax_err) = plt.subplots(2, 1, sharex=True)
@@ -95,9 +95,9 @@ time_steps = np.logspace(-3, -1, 10)
 plt.figure("Convergence")
 for solver, order in [
     (Euler(), 1),
-    (AB2(seed=Euler(), seed_steps=2), 2),
+    (AB2(seed=Euler(), seed_steps_per_step=2), 2),
     (RK4(), 4),
-    (AB4(seed=RK4(), seed_steps=1), 4),
+    (AB4(seed=RK4(), seed_steps_per_step=1), 4),
 ]:
     errs = []
     for k in tqdm(time_steps):
