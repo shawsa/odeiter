@@ -10,7 +10,7 @@ x(t) = sin(t)
 
 import matplotlib.pyplot as plt
 import numpy as np
-from odeiter import TimeDomain_Start_Stop_MaxSpacing, Euler, AB2, RK4
+from odeiter import TimeDomain_Start_Stop_MaxSpacing, Euler, AB2, RK4, AB4
 from tqdm import tqdm
 
 
@@ -40,7 +40,8 @@ def exact(t):  # exact solution for testing
 # simple example
 max_time_step = 1e-3
 time = TimeDomain_Start_Stop_MaxSpacing(t0, tf, max_time_step)
-solver = RK4()
+# solver = RK4()
+solver = AB4(seed=RK4(), seed_steps=1)
 xs = np.array([u[0] for u in solver.solve(u0, rhs, time)])
 fig, (ax_sol, ax_err) = plt.subplots(2, 1, sharex=True)
 ax_sol.plot(time.array, xs, label=solver.name)
@@ -59,6 +60,7 @@ solvers = [
     Euler(),
     AB2(seed=Euler(), seed_steps=2),
     RK4(),
+    AB4(seed=RK4(), seed_steps=1),
 ]
 colors = ["blue", "green", "red"]
 
@@ -95,6 +97,7 @@ for solver, order in [
     (Euler(), 1),
     (AB2(seed=Euler(), seed_steps=2), 2),
     (RK4(), 4),
+    (AB4(seed=RK4(), seed_steps=1), 4),
 ]:
     errs = []
     for k in tqdm(time_steps):

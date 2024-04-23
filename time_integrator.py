@@ -1,6 +1,8 @@
 """A time-integration class for solving ODEs numerically."""
 from abc import ABC, abstractmethod, abstractproperty
-from .time_domain import TimeDomain, TimeDomain_Start_Stop_Steps
+import numpy as np
+import numpy.linalg as la
+from .time_domain import TimeDomain
 
 
 class TimeIntegrator(ABC):
@@ -73,31 +75,11 @@ class RK4(SingleStepMethod):
         return u + h / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
 
 
-class AB2(TimeIntegrator):
-    def __init__(self, seed: TimeIntegrator, seed_steps):
-        self.seed = seed
-        self.seed_steps = seed_steps
-
+class TrapezoidalLinear(SingleStepMethod):
+    "rhs needs to be a function t -> A(t) for the matrix falued function A"
     @property
     def name(self):
-        return f"AB2 (seed: {self.seed.name})"
+        return "Trapezoidal"
 
-    def update(self, t, y, y_old, f, h):
-        return y + 3 / 2 * h * f(t, y) - 1 / 2 * h * f(t - h, y_old)
-
-    def solution_generator(self, u0, rhs, time: TimeDomain):
-        u = u0
-        t = time.start
-        yield u
-        u_old = u
-
-        seed_time = TimeDomain_Start_Stop_Steps(
-            time.start, time.spacing, self.seed_steps
-        )
-
-        u = self.seed.t_final(u, rhs, seed_time)
-        t = time.start + time.spacing
-        yield u
-        for t in time.array[1:-1]:
-            u, u_old = self.update(t, u, u_old, rhs, time.spacing), u
-            yield u
+    def update(self, t, u, f, h):
+        return la.solve(np.eye(len(u)) - h / 2 * f(t + h), u + h / 2 * f(t) @ u)
