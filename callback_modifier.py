@@ -1,11 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from .time_domain import TimeDomain
 from .time_integrator import Euler
 
-from .time_domain import TimeDomain
 
-
-def single_step_modifier(callback: callable):
+def callback_modifier(callback: callable):
     """Some applications require us to modify the current solution before
     producing the next in the sequence. For example, integrating over a delta
     pulse analytically can be done by adding the magnitude of the delta to the
@@ -14,7 +13,7 @@ def single_step_modifier(callback: callable):
     the real line. If the sim persists long enough then the pulse will
     eventually reach the artificial boundary and the result will be
     non-senical. If we dynamically change the window over which we are
-    simulating we can effectivelt remove this boundary provided the solution
+    simulating we can effectively remove this boundary, provided the solution
     remains pulse-like and the width does not grow larger than we expect."""
 
     def wrapper(cls):
@@ -38,7 +37,7 @@ if __name__ == '__main__':
             u = u + 1
         return t, u, f, h
 
-    EulerDelta = single_step_modifier(my_delta_callback)(Euler)
+    EulerDelta = callback_modifier(my_delta_callback)(Euler)
 
     def rhs(t, u):
         return np.sin(t)

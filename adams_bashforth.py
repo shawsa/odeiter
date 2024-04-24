@@ -12,10 +12,6 @@ class AdamsBashforthAbstract(TimeIntegrator):
         self.seed_steps = self.order - 1
 
     @abstractproperty
-    def order(self) -> int:
-        ...
-
-    @abstractproperty
     def name(self) -> str:
         ...
         return f"AB4 (seed: {self.seed.name})"
