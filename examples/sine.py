@@ -43,8 +43,7 @@ def exact(t):  # exact solution for testing
 # simple example
 max_time_step = 1e-3
 time = TimeDomain_Start_Stop_MaxSpacing(t0, tf, max_time_step)
-# solver = RK4()
-solver = Trapezoidal()
+solver = RK4()
 xs = np.array([u[0] for u in solver.solve(u0, rhs, time)])
 fig, (ax_sol, ax_err) = plt.subplots(2, 1, sharex=True)
 ax_sol.plot(time.array, xs, label=solver.name)
