@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from odeiter import TimeDomain_Start_Stop_MaxSpacing, TqdmWrapper, Euler, AB2, RK4, AB4
+from odeiter import TimeDomain_Start_Stop_MaxSpacing, TqdmWrapper
+from odeiter.single_step import ImplicitEuler, Trapezoidal, RK4
+# from odeiter.adams_bashforth import AB2, AB3, AB4, AB5
+# from odeiter.backward_differentiation import BDF2, BDF3, BDF4, BDF5, BDF6
+# from odeiter.adams_moulton import AM2, AM3, AM4
 from tqdm import tqdm
 
 
@@ -28,12 +32,24 @@ def exact(t):  # exact solution for testing
 
 
 # Solution
-max_time_step = 3e-2
+max_time_step = 1e-1
 time = TimeDomain_Start_Stop_MaxSpacing(t0, tf, max_time_step)
 # solver = Euler()
+# solver = ImplicitEuler()
+# solver = Trapezoidal()
+solver = RK4()
 # solver = AB2(seed=RK4(), seed_steps_per_step=1)
-solver = AB4(seed=RK4(), seed_steps_per_step=1)
-# solver = AB4(AB2(seed=Euler(), seed_steps_per_step=2), seed_steps_per_step=2)
+# solver = AB3(seed=RK4(), seed_steps_per_step=1)
+# solver = AB4(seed=RK4(), seed_steps_per_step=1)
+# solver = AB5(seed=RK4(), seed_steps_per_step=2)
+# solver = AM2(seed=RK4(), seed_steps_per_step=1)
+# solver = AM3(seed=RK4(), seed_steps_per_step=1)
+# solver = AM4(seed=RK4(), seed_steps_per_step=1)
+# solver = BDF2(seed=RK4(), seed_steps_per_step=1)
+# solver = BDF3(seed=RK4(), seed_steps_per_step=1)
+# solver = BDF4(seed=RK4(), seed_steps_per_step=1)
+# solver = BDF5(seed=RK4(), seed_steps_per_step=2)
+# solver = BDF6(seed=RK4(), seed_steps_per_step=2)
 color = "blue"
 
 plt.ion()
@@ -72,7 +88,7 @@ for k in tqdm(time_steps):
     errs.append(err)
 plt.loglog(time_steps, errs, "o", label=solver.name)
 
-for order in range(1, 5):
+for order in range(1, 7):
     order_err = errs[-1] * np.exp(order * np.log(time_steps[0] / time_steps[-1]))
     plt.plot(
         [time_steps[0], time_steps[-1]],

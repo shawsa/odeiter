@@ -8,19 +8,20 @@ which has the solution
 x(t) = sin(t)
 """
 
-from itertools import repeat
 import matplotlib.pyplot as plt
 from matplotlib.colors import TABLEAU_COLORS
 import numpy as np
-from odeiter import TimeDomain_Start_Stop_MaxSpacing, Euler, AB2, RK4, AB4
-from odeiter.implicit_single_step import Trapezoidal
+from odeiter import TimeDomain_Start_Stop_MaxSpacing, Euler, RK4, Trapezoidal
+from odeiter.backward_differentiation import BDF3
+from odeiter.adams_bashforth import AB5
+from odeiter.adams_moulton import AM4
 from tqdm import tqdm
 
 
 # define the system and parameters
 x0 = 0
 y0 = 1
-t0, tf = 0, 12
+t0, tf = 0, 5
 
 A = np.array(
     [
@@ -41,7 +42,7 @@ def exact(t):  # exact solution for testing
 
 
 # simple example
-max_time_step = 1e-3
+max_time_step = 1e-2
 time = TimeDomain_Start_Stop_MaxSpacing(t0, tf, max_time_step)
 solver = RK4()
 xs = np.array([u[0] for u in solver.solve(u0, rhs, time)])
@@ -58,10 +59,11 @@ ax_err.set_ylabel("error")
 # list of solvers to use
 solvers = [
     Euler(),
-    AB2(seed=Euler(), seed_steps_per_step=2),
     Trapezoidal(),
+    BDF3(seed=RK4(), seed_steps_per_step=1),
     RK4(),
-    AB4(seed=RK4(), seed_steps_per_step=1),
+    AB5(seed=RK4(), seed_steps_per_step=2),
+    AM4(seed=RK4(), seed_steps_per_step=2),
 ]
 
 

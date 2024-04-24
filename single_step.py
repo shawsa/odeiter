@@ -1,4 +1,6 @@
 from abc import abstractmethod
+from scipy.optimize import root
+
 from .time_domain import TimeDomain
 from .time_integrator import TimeIntegrator
 
@@ -17,7 +19,6 @@ class SingleStepMethod(TimeIntegrator):
 
 
 class Euler(SingleStepMethod):
-
     @property
     def order(self):
         return 1
@@ -65,3 +66,51 @@ class RK4(SingleStepMethod):
         k3 = f(t + h / 2, u + h / 2 * k2)
         k4 = f(t + h, u + h * k3)
         return u + h / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
+
+
+# implicit methods
+def default_root_finder(fun, x0):
+    sol = root(fun=fun, x0=x0)
+    if not sol.success:
+        raise ValueError(sol)
+    return sol.x
+
+
+class ImplicitEuler(SingleStepMethod):
+    def __init__(self, root_finder=default_root_finder):
+        self.root_finder = root_finder
+
+    @property
+    def order(self):
+        return 1
+
+    @property
+    def name(self):
+        return "Implicit Euler"
+
+    def update(self, t, u, f, h):
+        def func(x):
+            return -x + u + h * f(t + h, x)
+
+        return self.root_finder(func, u)
+
+
+class Trapezoidal(SingleStepMethod):
+    def __init__(self, root_finder=default_root_finder):
+        self.root_finder = root_finder
+
+    @property
+    def order(self):
+        return 2
+
+    @property
+    def name(self):
+        return "Trapezoidal"
+
+    def update(self, t, u, f, h):
+        fn = f(t, u)
+
+        def func(x):
+            return -x + u + h / 2 * (fn + f(t + h, x))
+
+        return self.root_finder(func, u)
