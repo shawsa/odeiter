@@ -68,7 +68,6 @@ class BackwardDifferentiationAbstract(TimeIntegrator):
             yield u
             us.append(u)
 
-        t = time.start + time.spacing * seed_steps
         for t in time.array[seed_steps:-1]:
             u = self.update(t, us, rhs, time.spacing)
             yield u

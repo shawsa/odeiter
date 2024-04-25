@@ -2,17 +2,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from odeiter import TimeDomain_Start_Stop_MaxSpacing, TqdmWrapper
 from odeiter.single_step import ImplicitEuler, Trapezoidal, RK4
-# from odeiter.adams_bashforth import AB2, AB3, AB4, AB5
-# from odeiter.backward_differentiation import BDF2, BDF3, BDF4, BDF5, BDF6
-# from odeiter.adams_moulton import AM2, AM3, AM4
+from odeiter.adams_bashforth import AB2, AB3, AB4, AB5
+from odeiter.backward_differentiation import BDF2, BDF3, BDF4, BDF5, BDF6
+from odeiter.adams_moulton import AM2, AM3, AM4
 from tqdm import tqdm
 
 
 # define the system and parameters
-x0 = 0
-y0 = 1
-t0, tf = 0, 15
-
 A = np.array(
     [
         [0, 1],
@@ -20,36 +16,43 @@ A = np.array(
     ]
 )
 
+x0 = 0
+y0 = -1
+t0, tf = 0, 15
 u0 = np.array([x0, y0])
 
 
 def rhs(t, u):
-    return A @ u
+    ret = A @ u
+    ret[1] += 3 * np.sin(2 * t)
+    return ret
 
 
 def exact(t):  # exact solution for testing
-    return np.sin(t)
+    return np.sin(t) - np.sin(2 * t)
 
 
 # Solution
-max_time_step = 1e-1
-time = TimeDomain_Start_Stop_MaxSpacing(t0, tf, max_time_step)
 # solver = Euler()
 # solver = ImplicitEuler()
 # solver = Trapezoidal()
-solver = RK4()
+# solver = RK4()
 # solver = AB2(seed=RK4(), seed_steps_per_step=1)
 # solver = AB3(seed=RK4(), seed_steps_per_step=1)
 # solver = AB4(seed=RK4(), seed_steps_per_step=1)
 # solver = AB5(seed=RK4(), seed_steps_per_step=2)
 # solver = AM2(seed=RK4(), seed_steps_per_step=1)
 # solver = AM3(seed=RK4(), seed_steps_per_step=1)
-# solver = AM4(seed=RK4(), seed_steps_per_step=1)
+solver = AM4(seed=RK4(), seed_steps_per_step=1)
 # solver = BDF2(seed=RK4(), seed_steps_per_step=1)
 # solver = BDF3(seed=RK4(), seed_steps_per_step=1)
 # solver = BDF4(seed=RK4(), seed_steps_per_step=1)
 # solver = BDF5(seed=RK4(), seed_steps_per_step=2)
 # solver = BDF6(seed=RK4(), seed_steps_per_step=2)
+
+max_time_step = 1e-1
+time = TimeDomain_Start_Stop_MaxSpacing(t0, tf, max_time_step)
+
 color = "blue"
 
 plt.ion()
@@ -77,7 +80,7 @@ for t, u in zip(time.array, TqdmWrapper(solver).solution_generator(u0, rhs, time
 
 # convergence plot
 x_true = exact(tf)
-time_steps = np.logspace(-3, -1, 10)
+time_steps = np.logspace(-3, -2, 10)
 plt.figure("Convergence")
 errs = []
 for k in tqdm(time_steps):

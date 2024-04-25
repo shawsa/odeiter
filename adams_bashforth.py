@@ -38,12 +38,12 @@ class AdamsBashforthAbstract(TimeIntegrator):
         ):
             yield u
             fs.append(rhs(t, u))
+            t += time.spacing
 
-        t = time.start + time.spacing * seed_steps
         for t in time.array[seed_steps:-1]:
             u = self.update(u, fs, time.spacing)
             yield u
-            fs.append(rhs(t, u))
+            fs.append(rhs(t + time.spacing, u))
 
 
 class AB2(AdamsBashforthAbstract):
@@ -57,7 +57,7 @@ class AB2(AdamsBashforthAbstract):
 
     @property
     def fs_coeffs(self) -> list[float]:
-        return [3/2, -1/2]
+        return [3 / 2, -1 / 2]
 
 
 class AB3(AdamsBashforthAbstract):
@@ -71,7 +71,7 @@ class AB3(AdamsBashforthAbstract):
 
     @property
     def fs_coeffs(self) -> list[float]:
-        return [23/12, -16/12, 5/12]
+        return [23 / 12, -16 / 12, 5 / 12]
 
 
 class AB4(AdamsBashforthAbstract):
@@ -85,7 +85,7 @@ class AB4(AdamsBashforthAbstract):
 
     @property
     def fs_coeffs(self) -> list[float]:
-        return [55/24, -59/24, 37/24, -9/24]
+        return [55 / 24, -59 / 24, 37 / 24, -9 / 24]
 
 
 class AB5(AdamsBashforthAbstract):
@@ -99,4 +99,4 @@ class AB5(AdamsBashforthAbstract):
 
     @property
     def fs_coeffs(self) -> list[float]:
-        return [1901/720, -2774/720, 2616/720, -1274/720, 251/720]
+        return [1901 / 720, -2774 / 720, 2616 / 720, -1274 / 720, 251 / 720]

@@ -60,12 +60,12 @@ class AdamsMoultonAbstract(TimeIntegrator):
         ):
             yield u
             fs.append(rhs(t, u))
+            t += time.spacing
 
-        t = time.start + time.spacing * seed_steps
         for t in time.array[seed_steps:-1]:
             u = self.update(t, u, rhs, fs, time.spacing)
             yield u
-            fs.append(rhs(t, u))
+            fs.append(rhs(t + time.spacing, u))
 
 
 AM1 = Trapezoidal
@@ -110,4 +110,4 @@ class AM4(AdamsMoultonAbstract):
 
     @property
     def fs_coeffs(self) -> list[float]:
-        return [251/720, 646/720, -264/720, 106/720, -19/720]
+        return [251 / 720, 646 / 720, -264 / 720, 106 / 720, -19 / 720]
