@@ -5,36 +5,6 @@ from collections import deque
 from itertools import islice
 
 
-class CustomQueue:
-    """Using deque from the collections module seems to result in
-    something like a memory leak. I found a bug report for something
-    similar https://bugs.python.org/issue43911, but it suggests that it
-    is an issue with the particular OS and C compliler.
-
-    I don't use much of the functionality of the deque, so this is a
-    custom class implementing a subset of the functionality.
-    """
-
-    def __init__(self, maxlen: int):
-        self.maxlen = maxlen
-        self.elements = [None for _ in range(maxlen)]
-        self.append_index = 0
-
-    def append(self, value):
-        self.elements[self.append_index] = value
-        self.append_index = (self.append_index + 1) % self.maxlen
-
-    def __getitem__(self, index: int):
-        return self.elements[self.append_index + index]
-
-    def __iter__(self):
-        for index in range(self.maxlen):
-            yield self.elements[(-self.maxlen + index + self.append_index)]
-
-    def __str__(self):
-        return str(list(self))
-
-
 class AdamsBashforthAbstract(TimeIntegrator):
     def __init__(self, seed: TimeIntegrator, seed_steps_per_step):
         self.seed = seed
@@ -59,8 +29,7 @@ class AdamsBashforthAbstract(TimeIntegrator):
             time.spacing / self.seed_steps_per_step,
         )
         t = time.start
-        # fs = deque(maxlen=self.order)
-        fs = CustomQueue(maxlen=self.order)
+        fs = deque(maxlen=self.order)
         for u in islice(
             self.seed.solution_generator(u0, rhs, seed_time),
             0,
