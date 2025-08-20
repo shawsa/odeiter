@@ -1,11 +1,14 @@
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
-from odeiter import TimeDomain_Start_Stop_MaxSpacing, TqdmWrapper
-from odeiter.single_step import ImplicitEuler, Trapezoidal, RK4
-from odeiter.adams_bashforth import AB2, AB3, AB4, AB5
-from odeiter.backward_differentiation import BDF2, BDF3, BDF4, BDF5, BDF6
-from odeiter.adams_moulton import AM2, AM3, AM4
 from tqdm import tqdm
+
+sys.path.append("../src")
+from src import TimeDomain_Start_Stop_MaxSpacing, TqdmWrapper
+from src.single_step import ImplicitEuler, Trapezoidal, RK4
+from src.adams_bashforth import AB2, AB3, AB4, AB5
+from src.backward_differentiation import BDF2, BDF3, BDF4, BDF5, BDF6
+from src.adams_moulton import AM2, AM3, AM4
 
 
 # define the system and parameters

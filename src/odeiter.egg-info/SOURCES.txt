@@ -8,6 +8,7 @@ src/callback_modifier.py
 src/single_step.py
 src/time_domain.py
 src/time_integrator.py
+src/examples/__init__.py
 src/examples/sine.py
 src/odeiter.egg-info/PKG-INFO
 src/odeiter.egg-info/SOURCES.txt
