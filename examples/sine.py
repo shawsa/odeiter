@@ -17,6 +17,7 @@ from odeiter.adams_bashforth import AB5
 from odeiter.adams_moulton import AM4
 from tqdm import tqdm
 
+plt.ion()
 
 # define the system and parameters
 x0 = 0
@@ -51,9 +52,9 @@ ax_sol.plot(time.array, xs, label=solver.name)
 ax_sol.plot(time.array, exact(time.array), "--", linewidth=3, label="True")
 ax_err.semilogy(time.array, np.abs(xs - exact(time.array)))
 ax_sol.legend(loc="lower left")
-ax_err.legend(loc="lower left")
 ax_err.set_xlabel("$t$")
 ax_err.set_ylabel("error")
+plt.show(block=True)
 
 
 # list of solvers to use
@@ -96,6 +97,7 @@ for t, *us in zip(
         ax_err.semilogy(t, err, color=color, marker=".")
 
     plt.pause(1e-3)
+plt.show(block=True)
 
 # convergence plot
 x_true = exact(tf)
@@ -103,13 +105,18 @@ time_steps = np.logspace(-3, -1, 10)
 plt.figure("Convergence")
 for solver, color in zip(solvers, colors):
     errs = []
+    my_steps = []
     for k in tqdm(time_steps):
         time = TimeDomain_Start_Stop_MaxSpacing(t0, tf, k)
-        u = solver.t_final(u0, rhs, time)
+        try:
+            u = solver.t_final(u0, rhs, time)
+            my_steps.append(k)
+        except ValueError:
+            continue
         x = u[0]
         err = abs((x - x_true) / x_true)
         errs.append(err)
-    plt.loglog(time_steps, errs, "o", color=color, label=solver.name)
+    plt.loglog(my_steps, errs, "o", color=color, label=solver.name)
     order_err = errs[-1] * np.exp(solver.order * np.log(time_steps[0] / time_steps[-1]))
     plt.plot(
         [time_steps[0], time_steps[-1]],
@@ -123,3 +130,4 @@ plt.xlabel("Time Step")
 plt.ylabel("Relative Error")
 plt.title("Convergence")
 plt.grid()
+plt.show(block=True)
