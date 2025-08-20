@@ -1,12 +1,8 @@
-"""
-Solve the second order equation
-x'' = -x
-x(0) = 0
-x'(0) = 1
+import sys
 
-which has the solution
-x(t) = sin(t)
-"""
+if __name__ != "__main__":
+    print("Nothing to import. Try importing this from __main__ to see the example")
+    sys.exit(1)
 
 import matplotlib.pyplot as plt
 from matplotlib.colors import TABLEAU_COLORS
@@ -16,6 +12,19 @@ from odeiter.backward_differentiation import BDF3
 from odeiter.adams_bashforth import AB5
 from odeiter.adams_moulton import AM4
 from tqdm import tqdm
+
+print(
+    """
+Solve the second order equation
+x'' = -x
+x(0) = 0
+x'(0) = 1
+
+which has the solution
+x(t) = sin(t)
+"""
+)
+
 
 plt.ion()
 

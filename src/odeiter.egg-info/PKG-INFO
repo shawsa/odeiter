@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: odeiter
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+Requires-Dist: matplotlib>=3.10.5
+Requires-Dist: numpy>=2.3.2
+Requires-Dist: pyqt5>=5.15.11
+Requires-Dist: scipy>=1.16.1
+Requires-Dist: tqdm>=4.67.1
+
+# odeiter
+A Python package for time-integration of systems of differential equations using generators.
