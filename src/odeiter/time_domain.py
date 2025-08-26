@@ -4,7 +4,17 @@ import numpy as np
 
 
 class TimeDomain:
-    def __init__(self, start, spacing, steps):
+    """
+    A class representing the discretization of a temporal domain.
+    This is used as an input to the odeiter.time_integrator.TimeInterator solvers.
+
+    TimeDomain(start: float, spacing: float, steps: int)
+
+    Represents a discretization of the time interval [start, spacing*steps]
+    with steps+1 points including endpoints.
+    """
+
+    def __init__(self, start: float, spacing: float, steps: int):
         self.start = start
         self.spacing = spacing
         self.steps = steps
@@ -18,7 +28,14 @@ class TimeDomain:
 
 
 class TimeDomain_Start_Stop_MaxSpacing(TimeDomain):
-    def __init__(self, start, stop, max_spacing):
+    """
+    A variant of odeiter.Timedomain that accepts different parameters.
+    TimeDomain_Start_Stop_MaxSpacing(start: float, stop: float, max_spacing: int)
+
+    Discretizes the temporal interval [start, stop] with stepsize less than max_spacing.
+    """
+
+    def __init__(self, start: float, stop: float, max_spacing: float):
         self.start = start
         self.steps = math.ceil((stop - start) / max_spacing)
         self.spacing = (stop - start) / self.steps
@@ -26,7 +43,14 @@ class TimeDomain_Start_Stop_MaxSpacing(TimeDomain):
 
 
 class TimeDomain_Start_Stop_Steps(TimeDomain):
-    def __init__(self, start, stop, steps):
+    """
+    A variant of odeiter.Timedomain that accepts different parameters.
+    TimeDomain_Start_Stop_Steps(start: float, stop: float, max_spacing: int)
+
+    Discretizes the temporal interval [start, stop] with `steps` equally sized steps.
+    """
+
+    def __init__(self, start: float, stop: float, steps: int):
         self.start = start
         self.steps = steps
         self.spacing = (stop - start) / steps
@@ -34,7 +58,7 @@ class TimeDomain_Start_Stop_Steps(TimeDomain):
 
 
 class Ray:
-    def __init__(self, start, step):
+    def __init__(self, start: float, step: float):
         self.start = start
         self.step = step
 
@@ -58,7 +82,25 @@ class Ray:
 
 
 class TimeRay(TimeDomain):
-    def __init__(self, start, spacing):
+    """
+    A variant of odeiter.Timedomain that has no end time.
+
+    Only use this with odeiter.TimeIntegrator.solution_generator.
+    This is effectively a while-loop, so always program a termination condition.
+
+    Do not use this with odeiter.TimeIntegrator.solve or odeiter.TimeIntgegraor.t_final.
+    Doing so will resut in an infinite loop.
+
+    TimeRay(start: float, spacing: float)
+
+    Discretizes the temporal interval [start, oo) with `steps` equally sized steps.
+
+    This is useful for simulating a system into the future for an amount of time that is
+    unkown from the start. For example, simulating until the difference between two
+    solutions is above a threshold.
+    """
+
+    def __init__(self, start: float, spacing: float):
         self.start = start
         self.spacing = spacing
 
