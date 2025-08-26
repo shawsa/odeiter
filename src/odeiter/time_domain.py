@@ -11,7 +11,7 @@ class TimeDomain:
         self.initialze_array()
 
     def initialze_array(self):
-        self.array = self.start + self.spacing * np.arange(self.steps + 1)
+        self.array = self.start + self.spacing * np.arange(self.steps + 1, dtype=float)
 
     def __iter__(self):
         yield from self.array

@@ -8,7 +8,7 @@ from .time_integrator import TimeIntegrator
 class SingleStepMethod(TimeIntegrator):
     @abstractmethod
     def update(self, t, u, f, h):
-        raise NotImplementedError
+        ...
 
     def solution_generator(self, u0, rhs, time: TimeDomain):
         u = u0

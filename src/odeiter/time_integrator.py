@@ -7,15 +7,15 @@ from .time_domain import TimeDomain
 class TimeIntegrator(ABC):
     @abstractproperty
     def name(self) -> str:
-        raise NotImplementedError
+        ...
 
     @abstractproperty
     def order(self) -> int:
-        raise NotImplementedError
+        ...
 
     @abstractmethod
     def solution_generator(self, u0, rhs, time: TimeDomain):
-        raise NotImplementedError
+        ...
 
     def solve(self, u0, rhs, time: TimeDomain):
         return list(self.solution_generator(u0, rhs, time))
@@ -42,5 +42,3 @@ class TqdmWrapper:
 
     def solution_generator(self, u0, rhs, time: TimeDomain):
         yield from tqdm(self.solver.solution_generator(u0, rhs, time), total=time.steps)
-
-
