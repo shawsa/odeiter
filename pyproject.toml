@@ -6,12 +6,10 @@ readme = "README.md"
 authors = [
     { name = "sage", email = "sage.b.shaw@gmail.com" }
 ]
-requires-python = ">=3.13"
+requires-python = ">=3.9"
 dependencies = [
-    "matplotlib>=3.10.5",
-    "numpy>=2.3.2",
-    "pyqt5>=5.15.11",
-    "scipy>=1.16.1",
+    "numpy>=1.24.4",
+    "scipy>=1.10.1",
     "tqdm>=4.67.1",
 ]
 
@@ -21,9 +19,12 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
-    "ipython>=9.4.0",
-    "pytest>=8.4.1",
-    "pytest-cov>=6.2.1",
+    "imageio>=2.37.0",
+    "ipython>=8.12.3",
+    "matplotlib>=3.7.5",
+    "pyqt5>=5.15.11",
+    "pytest>=8.3.5",
+    "pytest-cov>=5.0.0",
 ]
 
 [tool.pytest.ini_options]
