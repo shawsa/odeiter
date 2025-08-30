@@ -1,4 +1,4 @@
-"""A time-discretization for an ODE solver."""
+"""A collection of time-discretizations required for odeiter solvers."""
 import math
 import numpy as np
 
@@ -12,6 +12,12 @@ class TimeDomain:
 
     Represents a discretization of the time interval [start, spacing*steps]
     with steps+1 points including endpoints.
+
+    >>>t0 = 0
+    >>>dt = 0.1
+    >>>steps = 5
+    >>>time = TimeDomain(t0, dt, steps)
+    >>>print(time.array)
     """
 
     def __init__(self, start: float, spacing: float, steps: int):

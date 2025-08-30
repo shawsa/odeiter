@@ -1,3 +1,4 @@
+"""A collection of single-step solvers."""
 from abc import abstractmethod
 from scipy.optimize import root
 

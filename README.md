@@ -72,15 +72,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from odeiter import TimeDomain_Start_Stop_MaxSpacing, RK4
 
-x0 = 0
-y0 = 1
+u0 = np.array([0, 1])
 A = np.array(
     [
         [0, 1],
         [-1, 0],
     ]
 )
-u0 = np.array([x0, y0])
 
 
 def rhs(t, u):
@@ -100,7 +98,7 @@ solver = RK4()
 plt.ion()  # requires pyqt5 for interactive plotting
 # Loop over the soluttion
 for t, u in zip(time.array, solver.solution_generator(u0, rhs, time)):
-    # do whatever you want with the solution
+    # do whatever you want with the solution at each step
     x, y = u
     plt.plot(t, x, "k.")
     plt.pause(1e-3)

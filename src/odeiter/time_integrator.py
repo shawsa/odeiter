@@ -1,4 +1,11 @@
-"""A time-integration class for solving ODEs numerically."""
+"""A base class for solvers.
+For concrete classes see
+    odeiter.adams_bashforth
+    odeiter.adams_moulton
+    odeiter.backward_differentiation
+    odeiter.single_step
+If you're unsure what you're looking for, try odeiter.RK4
+"""
 from .time_domain import TimeDomain
 
 from abc import ABC, abstractmethod, abstractproperty
