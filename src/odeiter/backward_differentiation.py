@@ -1,18 +1,10 @@
 from abc import abstractproperty
 from collections import deque
 from itertools import islice
-from scipy.optimize import root
 
-from .single_step import ImplicitEuler
+from .single_step import ImplicitEuler, default_root_finder
 from .time_domain import TimeDomain, TimeRay
 from .time_integrator import TimeIntegrator
-
-
-def default_root_finder(fun, x0):
-    sol = root(fun=fun, x0=x0)
-    if not sol.success:
-        raise ValueError(sol)
-    return sol.x
 
 
 class BackwardDifferentiationAbstract(TimeIntegrator):

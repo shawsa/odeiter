@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from .time_domain import TimeDomain
-from .time_integrator import Euler
+from .single_step import Euler
 
 
 def callback_modifier(callback: callable):
@@ -29,7 +29,7 @@ def callback_modifier(callback: callable):
     return wrapper
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     """Test the single_step_modifier on a forcing fuction with a delta."""
 
     def my_delta_callback(t, u, f, h):

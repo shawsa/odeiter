@@ -1,17 +1,9 @@
-from .single_step import Trapezoidal
+from .single_step import Trapezoidal, default_root_finder
 from .time_domain import TimeDomain, TimeRay
 from .time_integrator import TimeIntegrator
 from abc import abstractproperty
 from collections import deque
 from itertools import islice
-from scipy.optimize import root
-
-
-def default_root_finder(fun, x0):
-    sol = root(fun=fun, x0=x0)
-    if not sol.success:
-        raise ValueError(sol)
-    return sol.x
 
 
 class AdamsMoultonAbstract(TimeIntegrator):
