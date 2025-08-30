@@ -13,9 +13,9 @@ In general, you don't want to simply compute the soltuion to your system.
 You want to compute the solution **and** do something with the solution.
 For example, the following animation was made using `odeiter` and it
 solves the system
-$$
+```math
 x''(t) = -x, \qquad x(0) = 0, \qquad x'(0) = 1
-$$
+```
 using 6 different solvers, simultaineously. At each time step it
 plots the solution, computes the relative erorr, and plots the relative error.
 
