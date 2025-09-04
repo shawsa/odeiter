@@ -5,22 +5,28 @@ import numpy as np
 
 class TimeDomain:
     """
-    A class representing the discretization of a temporal domain.
-    This is used as an input to the odeiter.time_integrator.TimeInterator solvers.
-
-    TimeDomain(start: float, spacing: float, steps: int)
-
-    Represents a discretization of the time interval [start, spacing*steps]
-    with steps+1 points including endpoints.
-
-    >>>t0 = 0
-    >>>dt = 0.1
-    >>>steps = 5
-    >>>time = TimeDomain(t0, dt, steps)
-    >>>print(time.array)
+    An iterable class representing the discretization of a temporal domain.
+    This is used as an input to the `odeiter.time_integrator.TimeInterator` solvers.
     """
 
     def __init__(self, start: float, spacing: float, steps: int):
+        """
+        A discretization of the interval $[\\text{start},\\  \\text{start} +
+        \\text{spacing}\\cdot\\text{steps}]$.
+
+        Parameters:
+            start: The inital time.
+            spacing: The space between time-steps.
+            steps: The total number of time steps.
+
+        Examples:
+            >>> t0 = 0
+            >>> dt = 0.1
+            >>> steps = 5
+            >>> time = TimeDomain(t0, dt, steps)
+            >>> print(time.array)
+            [0.  0.1 0.2 0.3 0.4 0.5]
+        """
         self.start = start
         self.spacing = spacing
         self.steps = steps
@@ -34,14 +40,23 @@ class TimeDomain:
 
 
 class TimeDomain_Start_Stop_MaxSpacing(TimeDomain):
-    """
-    A variant of odeiter.Timedomain that accepts different parameters.
-    TimeDomain_Start_Stop_MaxSpacing(start: float, stop: float, max_spacing: int)
-
-    Discretizes the temporal interval [start, stop] with stepsize less than max_spacing.
-    """
-
     def __init__(self, start: float, stop: float, max_spacing: float):
+        """An iterable discretization of the inverval $[\\text{start},\\ \\text{stop}]$
+        with a spacing of `max_spacing` or smaller.
+
+        Parameters:
+            start: The initial time.
+            stop: The final time.
+            max_spacing: an upper bound on the temporal step-size.
+
+        Examples:
+            >>> t0 = 0
+            >>> tf = 0.5
+            >>> max_dt = 0.11
+            >>> time = TimeDomain_Start_Stop_MaxSpacing(t0, tf, max_dt)
+            >>> print(time.array)
+            [0.  0.1 0.2 0.3 0.4 0.5]
+        """
         self.start = start
         self.steps = math.ceil((stop - start) / max_spacing)
         self.spacing = (stop - start) / self.steps
@@ -49,14 +64,23 @@ class TimeDomain_Start_Stop_MaxSpacing(TimeDomain):
 
 
 class TimeDomain_Start_Stop_Steps(TimeDomain):
-    """
-    A variant of odeiter.Timedomain that accepts different parameters.
-    TimeDomain_Start_Stop_Steps(start: float, stop: float, max_spacing: int)
-
-    Discretizes the temporal interval [start, stop] with `steps` equally sized steps.
-    """
-
     def __init__(self, start: float, stop: float, steps: int):
+        """An iterable discretization of the inverval $[\\text{start},\\ \\text{stop}]$
+        with $\\text{steps} + 1$ equally spaced ponits.
+
+        Parameters:
+            start: The initial time.
+            stop: The final time.
+            steps: The number of time steps.
+
+        Examples:
+            >>> t0 = 0
+            >>> tf = 0.5
+            >>> steps = 5
+            >>> time = TimeDomain_Start_Stop_Steps(t0, tf, steps)
+            >>> print(time.array)
+            [0.  0.1 0.2 0.3 0.4 0.5]
+        """
         self.start = start
         self.steps = steps
         self.spacing = (stop - start) / steps
@@ -89,7 +113,7 @@ class Ray:
 
 class TimeRay(TimeDomain):
     """
-    A variant of odeiter.Timedomain that has no end time.
+    A variant of Timedomain that has no end time.
 
     Only use this with odeiter.TimeIntegrator.solution_generator.
     This is effectively a while-loop, so always program a termination condition.
@@ -97,16 +121,32 @@ class TimeRay(TimeDomain):
     Do not use this with odeiter.TimeIntegrator.solve or odeiter.TimeIntgegraor.t_final.
     Doing so will resut in an infinite loop.
 
-    TimeRay(start: float, spacing: float)
-
-    Discretizes the temporal interval [start, oo) with `steps` equally sized steps.
-
     This is useful for simulating a system into the future for an amount of time that is
     unkown from the start. For example, simulating until the difference between two
     solutions is above a threshold.
     """
 
     def __init__(self, start: float, spacing: float):
+        """An iterable discretization of the inverval $[\\text{start},\\ \\infty)$
+        with with `spacing` space between points.
+
+        Parameters:
+            start: The initial time.
+            spacing: The space between time-steps.
+
+        Examples:
+            >>> t0 = 0
+            >>> spacing = 0.1
+            >>> time = TimeRay(t0, spacing)
+            >>> for t, _ in zip(time, range(6)):
+            ...     print(t)
+            0.0
+            0.1
+            0.2
+            0.30000000000000004
+            0.4
+            0.5
+        """
         self.start = start
         self.spacing = spacing
 

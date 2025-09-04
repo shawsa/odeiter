@@ -1,0 +1,40 @@
+site_name: odeiter
+
+theme: material
+
+plugins:
+    - mkdocstrings:
+        handlers:
+            python:
+                paths: [src]
+                options:
+                    members_order: source
+                    show_type_parameters: true
+                    # show_signature_annotations: true
+                    # parameter_headings: true
+                    # merge_init_into_class: true
+                    signature_crossrefs: true
+    - search
+
+markdown_extensions:
+    - pymdownx.arithmatex:
+         generic: true
+
+extra_javascript:
+    - javascripts/mathjax.js
+    - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+    - odeiter: 
+        - about: index.md
+        - install: install.md
+    - reference:
+        - adams_bashforth: reference/adams_bashforth.md
+        - adams_moulton: reference/adams_moulton.md
+        - backward_differentiation: reference/backward_differentiation.md
+        - callback_modifier: reference/callback_modifier.md
+        - root_finder: reference/root_finder.md
+        - single_step: reference/single_step.md
+        - time_domain: reference/time_domain.md
+        - time_integrator: reference/time_integrator.md
+

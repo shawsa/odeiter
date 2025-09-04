@@ -1,11 +1,3 @@
-"""A base class for solvers.
-For concrete classes see
-    odeiter.adams_bashforth
-    odeiter.adams_moulton
-    odeiter.backward_differentiation
-    odeiter.single_step
-If you're unsure what you're looking for, try odeiter.RK4
-"""
 from .time_domain import TimeDomain
 
 from abc import ABC, abstractmethod, abstractproperty
@@ -15,18 +7,20 @@ from typing import Callable, Generator
 
 
 class TimeIntegrator(ABC):
+    """A base class for solvers."""
+
     @abstractproperty
     def name(self) -> str:
         ...
 
     @abstractproperty
     def order(self) -> int:
-        """The order of the method. If this method is order o
+        """The order of the method. If this method is order $o$
         then cutting the time-step in half should reduce the error
-        by a factor of (1/2)^o.
+        by a factor of $(1/2)^o$.
 
         This is limited by machine precision. Additionally, it may not exhibit
-        this convergence behaviour if the time step is too large, or if the
+        this convergence behavior if the time step is too large, or if the
         forcing term is not smooth enough.
         """
         ...
@@ -41,16 +35,16 @@ class TimeIntegrator(ABC):
         """
         Return a generator that yields the solution at each time in time.array.
 
-        u0: a numpy array of initial conditions. It should have the same shape as
-            the solution at each time step.
+        Parameters:
+            u0: a numpy array of initial conditions. It should have the same shape as
+                the solution at each time step.
+            rhs: A function rhs(t, u) that is the right-hand-side of the equation
+                 u' = rhs(t, u).
+            time: An odeiter.TimeDomain instance.
 
-        rhs: A function rhs(t, u) that is the right-hand-side of the equation
-             u' = rhs(t, u).
-
-        time: An odeiter.TimeDomain instance.
-
-        Returns: a generator that yeilds the solution at each time
-        step in time.array.
+        Returns:
+            a generator that yeilds the solution at each time
+            step in time.array.
         """
         ...
 
@@ -62,8 +56,17 @@ class TimeIntegrator(ABC):
     ) -> list[np.ndarray[float]]:
         """
         Return a list of the solutions at each time for times in time.array.
-        Equivalent to list(solver.solution_generator(u0, rhs, time)).
-        See TimeIntegrator.solution_generator for parameter inputs.
+        Equivalent to `list(solver.solution_generator(u0, rhs, time))`.
+
+        Parameters:
+            u0: a numpy array of initial conditions. It should have the same shape as
+                the solution at each time step.
+            rhs: A function rhs(t, u) that is the right-hand-side of the equation
+                 u' = rhs(t, u).
+            time: An odeiter.TimeDomain instance.
+
+        Returns:
+            A list of the solution at each time in `time.array`.
         """
         return list(self.solution_generator(u0, rhs, time))
 
@@ -72,11 +75,20 @@ class TimeIntegrator(ABC):
         u0: np.ndarray[float],
         rhs: Callable[[float, np.ndarray[float]], np.ndarray[float]],
         time: TimeDomain,
-    ) -> list[np.ndarray[float]]:
+    ) -> np.ndarray[float]:
         """
-        Returns the solution at the final time time.array[-1].
-        Equivalent to solver.solve[-1].
-        See TimeIntegrator.solution_generator for parameter inputs.
+        Returns the solution at the final time `time.array[-1]`.
+        Equivalent to `solver.solve[-1]`.
+
+        Parameters:
+            u0: a numpy array of initial conditions. It should have the same shape as
+                the solution at each time step.
+            rhs: A function rhs(t, u) that is the right-hand-side of the equation
+                 u' = rhs(t, u).
+            time: An odeiter.TimeDomain instance.
+
+        Returns:
+            The solution at the final time.
         """
         for u in self.solution_generator(u0, rhs, time):
             pass

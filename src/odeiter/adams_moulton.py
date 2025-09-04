@@ -1,32 +1,87 @@
-from .single_step import Trapezoidal, default_root_finder
+"""A module containing Adams-Moulton solvers of several orders."""
+from .single_step import Trapezoidal
+from .root_finder import RootFinder, DefaultRootFinder
 from .time_domain import TimeDomain, TimeRay
 from .time_integrator import TimeIntegrator
 from abc import abstractproperty
 from collections import deque
 from itertools import islice
+import numpy as np
+from typing import Callable, Generator
 
 
 class AdamsMoultonAbstract(TimeIntegrator):
+    """
+    An abstract class for Adams-Moulton (AM) solvers.
+    All AM solvers will inherit these methods. Additionally,
+    they inherit the methods of [`time_integrator.TimeIntegrator`](time_integrator.md)
+    as well.
+    """
+
     def __init__(
         self,
         seed: TimeIntegrator,
         seed_steps_per_step: int,
-        root_finder=default_root_finder,
+        root_finder: RootFinder = DefaultRootFinder,
     ):
+        """
+        Parameters:
+            seed: another time integrator used to take the first few steps.
+            seed_steps_per_step: the number of seed steps taking per step
+                of the AB integrator.
+            root_finder: a function of the form `root_finder(f, u0)` that returns
+                the solution to `f(u) = 0` using `u0` as an approximate soluiton.
+        """
         self.seed = seed
         self.seed_steps_per_step = seed_steps_per_step
         self.seed_steps = self.order - 2
-        self.root_finder = root_finder
+        self.root_finder = root_finder.solve
 
     @abstractproperty
     def name(self) -> str:
+        """
+        Returns:
+            The name of the method
+        """
+        ...
+
+    @abstractproperty
+    def order(self) -> int:
+        """
+        Returns:
+            The order of the method
+        """
         ...
 
     @abstractproperty
     def fs_coeffs(self) -> list[float]:
+        """
+        Returns:
+            The interpolation coefficients of the method.
+        """
         ...
 
-    def update(self, t, u, rhs, fs, delta_t):
+    def update(
+        self,
+        t: float,
+        u: np.ndarray[float],
+        rhs: Callable[[float, np.ndarray[float]], np.ndarray[float]],
+        fs: np.ndarray[float],
+        delta_t: float,
+    ) -> np.ndarray[float]:
+        """
+        Compute the next time step. You probably want `solution_generator` instead.
+
+        Parameters:
+            t: The current time.
+            u: The solution at the current time-step.
+            rhs: The right-hand-side of the system as a function `rhs(t, u) -> u'`.
+            fs: the right-hand-side at several previous time-steps.
+            delta_t: the temporal step-size.
+
+        Returns:
+            The solution at the next time step.
+        """
         const_vec = u + delta_t * sum(
             c * f for c, f in zip(self.fs_coeffs[-1:0:-1], fs)
         )
@@ -36,7 +91,23 @@ class AdamsMoultonAbstract(TimeIntegrator):
 
         return self.root_finder(func, u)
 
-    def solution_generator(self, u0, rhs, time: TimeDomain):
+    def solution_generator(
+        self,
+        u0: np.ndarray[float],
+        rhs: Callable[[float, np.ndarray[float]], np.ndarray[float]],
+        time: TimeDomain,
+    ) -> Generator[np.ndarray[float], None, None]:
+        """Create a generator that yields the solution for each time in `time`.
+
+        Parameters:
+            u0: The initial condition of the system.
+                Must be the same size as the system.
+            rhs: The right-hand-side as a function with signature `rhs(t, u) -> u'`.
+            time: The discretized time domain from.
+
+        Returns:
+            A generator that yields the solution at each time in `time.array`.
+        """
         seed_steps = self.order - 1
         seed_time = TimeRay(
             time.start,
@@ -64,6 +135,8 @@ AM1 = Trapezoidal
 
 
 class AM2(AdamsMoultonAbstract):
+    """Adams Moulton of order 3."""
+
     @property
     def order(self):
         return 3
@@ -78,6 +151,8 @@ class AM2(AdamsMoultonAbstract):
 
 
 class AM3(AdamsMoultonAbstract):
+    """Adams Moulton of order 4."""
+
     @property
     def order(self):
         return 4
@@ -92,6 +167,8 @@ class AM3(AdamsMoultonAbstract):
 
 
 class AM4(AdamsMoultonAbstract):
+    """Adams Moulton of order 5."""
+
     @property
     def order(self):
         return 5

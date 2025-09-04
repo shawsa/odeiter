@@ -6,7 +6,6 @@ from odeiter.single_step import (
     Euler,
     EulerDelta,
     RK4,
-    default_root_finder,
     ImplicitEuler,
     Trapezoidal,
 )
@@ -72,7 +71,7 @@ class TestEuler:
     def test_Euler_update(self):
         solver = Euler()
         time = TimeDomain(0.0, 0.1, 10)
-        first_step = solver.update(t=0.0, u=INIT, f=rhs, h=time.spacing)
+        first_step = solver.update(t=0.0, u=INIT, f=rhs, delta_t=time.spacing)
         assert np.all(first_step == np.array([1.1, 2.2]))
 
 
@@ -130,21 +129,6 @@ class TestRK4:
             approx = solver.t_final(INIT, rhs, time)
             errs.append(la.norm((approx - exact) / exact))
         assert 4 == pytest.approx(np.log10(errs[0] / errs[-1]), rel=0.1)
-
-
-class TestDefaultRootFinder:
-    def test_default_root_finder(self):
-        def foo(x):
-            return x**2 - 1
-
-        assert 1.0 == pytest.approx(default_root_finder(foo, 1.1))
-
-    def test_default_root_finder_failure(self):
-        def foo(x):
-            return x**2 + 1
-
-        with pytest.raises(ValueError):
-            default_root_finder(foo, 1.0)
 
 
 class TestImplicitEuler:

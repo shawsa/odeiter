@@ -7,7 +7,7 @@ from odeiter.adams_bashforth import (
     AB4,
     AB5,
 )
-from odeiter.time_domain import TimeDomain, TimeDomain_Start_Stop_MaxSpacing
+from odeiter.time_domain import TimeDomain_Start_Stop_MaxSpacing
 import pytest
 
 
