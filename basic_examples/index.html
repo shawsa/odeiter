@@ -9,20 +9,22 @@
       
       
       
+        <link rel="prev" href="../install/">
       
-        <link rel="next" href="install/">
+      
+        <link rel="next" href="../reference/adams_bashforth/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
-        <title>About - odeiter</title>
+        <title>Basic Examples - odeiter</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
       
       
 
@@ -41,9 +43,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -62,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#odeiter" class="md-skip">
+        <a href="#basic-syntax" class="md-skip">
           Skip to content
         </a>
       
@@ -78,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="odeiter" class="md-header__button md-logo" aria-label="odeiter" data-md-component="logo">
+    <a href=".." title="odeiter" class="md-header__button md-logo" aria-label="odeiter" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -98,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              About
+              Basic Examples
             
           </span>
         </div>
@@ -176,7 +178,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="odeiter" class="md-nav__button md-logo" aria-label="odeiter" data-md-component="logo">
+    <a href=".." title="odeiter" class="md-nav__button md-logo" aria-label="odeiter" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -231,32 +233,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    About
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -267,53 +247,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#why-another-ode-solver" class="md-nav__link">
-    <span class="md-ellipsis">
-      Why another ODE solver?
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#memory-efficient" class="md-nav__link">
-    <span class="md-ellipsis">
-      Memory Efficient
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lazy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Lazy
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -326,7 +259,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/" class="md-nav__link">
+      <a href="../install/" class="md-nav__link">
         
   
   
@@ -346,10 +279,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="basic_examples/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Basic Examples
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -360,6 +313,42 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic syntax
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interactive-plotting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactive Plotting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -417,7 +406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/adams_bashforth/" class="md-nav__link">
+      <a href="../reference/adams_bashforth/" class="md-nav__link">
         
   
   
@@ -440,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/adams_moulton/" class="md-nav__link">
+      <a href="../reference/adams_moulton/" class="md-nav__link">
         
   
   
@@ -463,7 +452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/backward_differentiation/" class="md-nav__link">
+      <a href="../reference/backward_differentiation/" class="md-nav__link">
         
   
   
@@ -486,7 +475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/callback_modifier/" class="md-nav__link">
+      <a href="../reference/callback_modifier/" class="md-nav__link">
         
   
   
@@ -509,7 +498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/root_finder/" class="md-nav__link">
+      <a href="../reference/root_finder/" class="md-nav__link">
         
   
   
@@ -532,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/single_step/" class="md-nav__link">
+      <a href="../reference/single_step/" class="md-nav__link">
         
   
   
@@ -555,7 +544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/time_domain/" class="md-nav__link">
+      <a href="../reference/time_domain/" class="md-nav__link">
         
   
   
@@ -578,7 +567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/time_integrator/" class="md-nav__link">
+      <a href="../reference/time_integrator/" class="md-nav__link">
         
   
   
@@ -618,8 +607,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -628,27 +615,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-another-ode-solver" class="md-nav__link">
+  <a href="#basic-syntax" class="md-nav__link">
     <span class="md-ellipsis">
-      Why another ODE solver?
+      Basic syntax
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#memory-efficient" class="md-nav__link">
+  <a href="#interactive-plotting" class="md-nav__link">
     <span class="md-ellipsis">
-      Memory Efficient
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lazy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Lazy
+      Interactive Plotting
     </span>
   </a>
   
@@ -670,53 +648,94 @@
 
 
 
-<h1 id="odeiter">odeiter</h1>
-<p>An iterator-based  python package for solving systems of differential equations.</p>
-<h2 id="why-another-ode-solver">Why another ODE solver?</h2>
-<p>The elephant in the room is <code>scipy.integrate.sovle_ivp</code>.
-Why would you use <code>odeiter</code> instead?
-If you want an array of your solution at all time points in a finite interval
-then <code>solve_ivp</code> is your best solution, but I found myself needing something
-more flexible. So I made <code>odeiter</code> which takes advantage of Python generators.</p>
-<p>Generators decouple the solver code from the looping body.
-In general, you don't want to simply compute the soltuion to your system.
-You want to compute the solution <strong>and</strong> do something with the solution.
-For example, the following animation was made using <code>odeiter</code> and it
-solves the system
+<h2 id="basic-syntax">Basic syntax</h2>
+<p>For example, to solve the initial value problem
 $$
-x''(t) = -x, \qquad x(0) = 0, \qquad x'(0) = 1
+\begin{align}
+    u''(t) &amp;= -u \\
+    u(0) &amp;= 0 \\
+    u'(0) &amp;= 1
+\end{align}
 $$
-using 6 different solvers, simultaineously. At each time step it
-plots the solution, computes the relative erorr, and plots the relative error.
-<img alt="" src="https://raw.githubusercontent.com/shawsa/odeiter/refs/heads/main/examples/simultaneous_solves.gif" /></p>
-<p>This can be done with <code>solve_ivp</code> but one would have to store the entire solution
-for each solve in memory and <em>then</em> loop again to perform the plotting.
-That doesn't sound so bad for a system with only two variables (since it's a second
-order equation), but this becomes imensly important when you want to solve PDEs where
-the number of dimensions can easily be in the thousands or millions.</p>
-<h2 id="memory-efficient">Memory Efficient</h2>
-<p>For example, I used <code>odeiter</code> to solve a neuralfield eqution on a bumpy-sphere.
-A neural field equation is an integro-differential equation, so the resulting ODE
-had hundreds of thousands of dimensions, one for each sample point on the surface.
-At each time step, I plot the solution (left) and I also plot the maximum value
-of the solution (right) as a continuous path across the surface.</p>
-<p><img alt="" src="https://raw.githubusercontent.com/shawsa/odeiter/refs/heads/main/readme_media/bumpy_sphere_nf.gif" /></p>
-<p>Once a frame for the animation is generated, the solution at that time point
-is no longer requried so it is discarded and the memory is reclaimed. </p>
-<h2 id="lazy">Lazy</h2>
-<p>Another advantage, is that generators are lazy. They don't compute the solution until
-you ask for it. This allows you to run simulations without a predetermined stoping
-condition. For example, the flowing animation shows two simulations created with
-<code>odeiter</code> where the difference is in the amplitudes of the forcing functions (magenta).</p>
-<p><img alt="" src="https://raw.githubusercontent.com/shawsa/odeiter/refs/heads/main/readme_media/looping_entrainment_demo.gif" /></p>
-<p>The top simulation entrains so the solution (blue) rides the forcing function (magenta)
-indefinately, and achieves a stable traveling wave solution.
-In the bottom simulation, the solution rides the forcing function for a while
-but in the end it does not entrain because the forcing function is too weak.
-I tested many amplitudes and simulated until either they reached a traveling pulse
-solution or until the forcing term was separated from the solution by a certain distance.
-I was able to implement this easily without needing to know how long
-the simulation would need to run.</p>
+we can express it as a first-order system
+$$
+\begin{align}
+    \vec{u}' &amp;= \begin{bmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{bmatrix} \vec{u} \\
+    \vec{u} &amp;= \begin{bmatrix}0 \\ 1 \end{bmatrix}
+\end{align}
+$$
+then solve the system with a time-integrator like <a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">RK4</a> like so:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">odeiter</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeDomain</span><span class="p">,</span> <span class="n">RK4</span>
+<span class="n">u0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span> <span class="o">@</span> <span class="n">u</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="n">TimeDomain</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">RK4</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">solver</span><span class="o">.</span><span class="n">solution_generator</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+    <span class="c1"># so something with the solution at this time</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+<span class="c1"># OUTPUT</span>
+<span class="c1"># [0. 1.]</span>
+<span class="c1"># [0.09983333 0.99500417]</span>
+<span class="c1"># [0.19866917 0.9800666 ]</span>
+<span class="c1"># [0.29551996 0.95533654]</span>
+<span class="c1"># [0.38941803 0.9210611 ]</span>
+</code></pre></div>
+<h1 id="interactive-plotting">Interactive Plotting</h1>
+<p>This shows some of the flexibily by solving the system above, plotting
+the solution and plotting the error.</p>
+<p>The plotting occurs as the system is solved, rather than after it is solved
+and requires <code>pyqt5</code> and <code>matplotlib</code> to function properly.</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Solve the second order equation</span>
+<span class="sd">x&#39;&#39; = -x</span>
+<span class="sd">x(0) = 0</span>
+<span class="sd">x&#39;(0) = 1</span>
+
+<span class="sd">which has the solution</span>
+<span class="sd">x(t) = sin(t)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">odeiter</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeDomain_Start_Stop_MaxSpacing</span><span class="p">,</span> <span class="n">RK4</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">u0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">])</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">A</span> <span class="o">@</span> <span class="n">u</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">exact</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>  <span class="c1"># exact solution for testing</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+
+<span class="n">t0</span><span class="p">,</span> <span class="n">tf</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">max_time_step</span> <span class="o">=</span> <span class="mf">1e-2</span>
+<span class="c1"># Create a TimeDomain object</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">TimeDomain_Start_Stop_MaxSpacing</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">max_time_step</span><span class="p">)</span>
+<span class="c1"># Choose a solver</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">RK4</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>  <span class="c1"># requires pyqt5 for interactive plotting</span>
+<span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">solution_generator</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">time</span><span class="p">)):</span>
+    <span class="c1"># do whatever you want with the solution</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">u</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;k.&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
 
 
 
@@ -765,10 +784,10 @@ the simulation would need to run.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
       
         <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
