@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>odeiter</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "odeiter";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> odeiter
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">odeiter</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#why-another-ode-solver">Why another ODE solver?</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="reference/">reference</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">odeiter</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">odeiter</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="odeiter">odeiter</h1>
+<p>An iterator-based  python package for solving systems of differential equations.
+For example, to solve the initial value problem
+$$
+\begin{align}
+    u''(t) &amp;= -u \\
+    u(0) &amp;= 0 \\
+    u'(0) &amp;= 1
+\end{align}
+$$
+we can express it as a first-order system
+$$
+\begin{align}
+    \vec{u}' &amp;= \begin{bmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{bmatrix} \vec{u} \\
+    \vec{u} &amp;= \begin{bmatrix}0 \\ 1 \end{bmatrix}
+\end{align}
+$$
+then solve the system with a time-integrator like <a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">RK4</a> like so:</p>
+<pre><code>&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from odeiter import TimeDomain, RK4
+&gt;&gt;&gt; u0 = np.array([0.0, 1.0])
+&gt;&gt;&gt;
+&gt;&gt;&gt; def rhs(t, u):
+...     return np.array([[0, 1], [-1, 0]]) @ u
+...
+&gt;&gt;&gt; time = TimeDomain(0, 0.1, 4)
+&gt;&gt;&gt; solver = RK4()
+&gt;&gt;&gt; for u in solver.solution_generator(u0, rhs, time):
+...     # so something with the solution at this time
+...     print(u)
+...
+[0. 1.]
+[0.09983333 0.99500417]
+[0.19866917 0.9800666 ]
+[0.29551996 0.95533654]
+[0.38941803 0.9210611 ]
+</code></pre>
+<h2 id="why-another-ode-solver">Why another ODE solver?</h2>
+<p>The elephant in the room is <code>scipy.integrate.sovle_ivp</code>.
+Why would you use <code>odeiter</code> instead?
+If you want an array of your solution at all time points in a finite interval
+then <code>solve_ivp</code> is your best solution, but I found myself needing something
+more flexible. So I made <code>odeiter</code> which takes advantage of Python generators.</p>
+<p>Generators decouple the solver code from the looping body.
+In general, you don't want to simply compute the soltuion to your system.
+You want to compute the solution <strong>and</strong> do something with the solution.
+For example, the following animation was made using <code>odeiter</code> and it
+solves the system
+$$
+x''(t) = -x, \qquad x(0) = 0, \qquad x'(0) = 1
+$$
+using 6 different solvers, simultaineously. At each time step it
+plots the solution, computes the relative erorr, and plots the relative error.</p>
+<p><img alt="" src="https://raw.githubusercontent.com/shawsa/odeiter/refs/heads/main/examples/simultaneous_solves.gif" /></p>
+<p>This can be done with <code>solve_ivp</code> but one would have to store the entire solution
+for each solve in memory and <em>then</em> loop again to perform the plotting.
+That doesn't sound so bad for a system with only two variables (since it's a second
+order equation), but this becomes imensly important when you want to solve PDEs.</p>
+<p>For example, I used <code>odeiter</code> to solve a neuralfield eqution on a bumpy-sphere.
+A neural field equation is an integro-differential equation, so the resulting ODE
+had hundreds of thousands of dimensions, one for each sample point on the surface.
+At each time step, I plot the solution (left) and I also plot the maximum value
+of the solution (right) as a continuous path across the surface.</p>
+<p><img alt="" src="https://raw.githubusercontent.com/shawsa/odeiter/refs/heads/main/readme_media/bumpy_sphere_nf.gif" /></p>
+<p>Once a frame for the animation is generated, the solution at that time point
+is no longer requried so it is discarded and the memory is freed. </p>
+<p>Another advantage, is that generators are lazy. They don't compute the solution until
+you ask for it. This allows you to run simulations without a predetermined stoping
+condition. For example, the flowing animation shows two simulations created with
+<code>odeiter</code> where the difference is in the amplitudes of the forcing functions (magenta).</p>
+<p><img alt="" src="https://raw.githubusercontent.com/shawsa/odeiter/refs/heads/main/readme_media/looping_entrainment_demo.gif" /></p>
+<p>The top simulation entrains so the solution (blue) rides the forcing function (magenta)
+indefinately, and achieves a stable traveling wave solution.
+In the bottom simulation, the solution rides the forcing function for a while
+but in the end it does not entrain because the forcing function is too weak.
+I tested many amplitudes and simulated until either they reached a traveling pulse
+solution or until the forcing term was separated from the solution by a certain distance.
+I was able to implement this simply without needing to know how long I would simulate.</p>
+<h1 id="example">Example</h1>
+<p>This shows a standard example that plots the solution at each time 
+step. This code requires <code>pyqt5</code> and <code>matplotlib</code> to function properly.</p>
+<pre><code>&quot;&quot;&quot;
+Solve the second order equation
+x'' = -x
+x(0) = 0
+x'(0) = 1
+
+which has the solution
+x(t) = sin(t)
+&quot;&quot;&quot;
+import matplotlib.pyplot as plt
+import numpy as np
+from odeiter import TimeDomain_Start_Stop_MaxSpacing, RK4
+
+u0 = np.array([0, 1])
+A = np.array(
+    [
+        [0, 1],
+        [-1, 0],
+    ]
+)
+
+
+def rhs(t, u):
+    return A @ u
+
+
+def exact(t):  # exact solution for testing
+    return np.sin(t)
+
+
+t0, tf = 0, 2 * np.pi
+max_time_step = 1e-2
+# Create a TimeDomain object
+time = TimeDomain_Start_Stop_MaxSpacing(t0, tf, max_time_step)
+# Choose a solver
+solver = RK4()
+plt.ion()  # requires pyqt5 for interactive plotting
+# Loop over the soluttion
+for t, u in zip(time.array, solver.solution_generator(u0, rhs, time)):
+    # do whatever you want with the solution at each step
+    x, y = u
+    plt.plot(t, x, &quot;k.&quot;)
+    plt.pause(1e-3)
+plt.show(block=True)
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="reference/" class="btn btn-neutral float-right" title="reference">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="reference/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="javascripts/mathjax.js"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2025-09-04 02:00:23.794096+00:00
+-->
