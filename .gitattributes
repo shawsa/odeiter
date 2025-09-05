@@ -1,0 +1,4 @@
+docs/** linguist-documentation
+site/** linguist-generated
+reports/** linguist-generated
+mkdocs.md linguist-documentation
