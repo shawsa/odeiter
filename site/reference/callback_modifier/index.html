@@ -9,18 +9,22 @@
       
       
       
+        <link rel="prev" href="../backward_differentiation/">
       
       
-      <link rel="icon" href="/assets/images/favicon.png">
+        <link rel="next" href="../root_finder/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
-        <title>odeiter</title>
+        <title>callback_modifier - odeiter</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
       
       
 
@@ -39,9 +43,9 @@
       
     
     
-      <link rel="stylesheet" href="/assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -59,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#odeiter.callback_modifier" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -71,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="odeiter" class="md-header__button md-logo" aria-label="odeiter" data-md-component="logo">
+    <a href="../.." title="odeiter" class="md-header__button md-logo" aria-label="odeiter" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -91,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              callback_modifier
             
           </span>
         </div>
@@ -169,7 +178,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="odeiter" class="md-nav__button md-logo" aria-label="odeiter" data-md-component="logo">
+    <a href="../.." title="odeiter" class="md-nav__button md-logo" aria-label="odeiter" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -225,7 +234,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -248,7 +257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/install/" class="md-nav__link">
+      <a href="../../install/" class="md-nav__link">
         
   
   
@@ -271,7 +280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/basic_examples/" class="md-nav__link">
+      <a href="../../basic_examples/" class="md-nav__link">
         
   
   
@@ -298,18 +307,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -325,7 +336,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             reference
@@ -339,7 +350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/reference/adams_bashforth/" class="md-nav__link">
+      <a href="../adams_bashforth/" class="md-nav__link">
         
   
   
@@ -362,7 +373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/reference/adams_moulton/" class="md-nav__link">
+      <a href="../adams_moulton/" class="md-nav__link">
         
   
   
@@ -385,7 +396,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/reference/backward_differentiation/" class="md-nav__link">
+      <a href="../backward_differentiation/" class="md-nav__link">
         
   
   
@@ -405,10 +416,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/reference/callback_modifier/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    callback_modifier
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -419,6 +450,42 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#odeiter.callback_modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      callback_modifier
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#odeiter.callback_modifier.callback_modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      callback_modifier
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -431,7 +498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/reference/root_finder/" class="md-nav__link">
+      <a href="../root_finder/" class="md-nav__link">
         
   
   
@@ -454,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/reference/single_step/" class="md-nav__link">
+      <a href="../single_step/" class="md-nav__link">
         
   
   
@@ -477,7 +544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/reference/time_domain/" class="md-nav__link">
+      <a href="../time_domain/" class="md-nav__link">
         
   
   
@@ -500,7 +567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/reference/time_integrator/" class="md-nav__link">
+      <a href="../time_integrator/" class="md-nav__link">
         
   
   
@@ -541,6 +608,32 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#odeiter.callback_modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      callback_modifier
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#odeiter.callback_modifier.callback_modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      callback_modifier
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -551,8 +644,135 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+
+  <h1>callback_modifier</h1>
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="odeiter.callback_modifier"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="odeiter.callback_modifier.callback_modifier" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">callback_modifier</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Some applications require us to modify the current solution before
+producing the next in the sequence. For example, integrating over a delta
+pulse analytically can be done by adding the magnitude of the delta to the
+solution. The motivating example for this however is for domain shifting.
+We simulate pulses on the real line by simulating over a finite portion of
+the real line. If the sim persists long enough then the pulse will
+eventually reach the artificial boundary and the result will be
+non-senical. If we dynamically change the window over which we are
+simulating we can effectively remove this boundary, provided the solution
+remains pulse-like and the width does not grow larger than we expect.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>src/odeiter/callback_modifier.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">callback_modifier</span><span class="p">(</span><span class="n">callback</span><span class="p">:</span> <span class="nb">callable</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Some applications require us to modify the current solution before</span>
+<span class="sd">    producing the next in the sequence. For example, integrating over a delta</span>
+<span class="sd">    pulse analytically can be done by adding the magnitude of the delta to the</span>
+<span class="sd">    solution. The motivating example for this however is for domain shifting.</span>
+<span class="sd">    We simulate pulses on the real line by simulating over a finite portion of</span>
+<span class="sd">    the real line. If the sim persists long enough then the pulse will</span>
+<span class="sd">    eventually reach the artificial boundary and the result will be</span>
+<span class="sd">    non-senical. If we dynamically change the window over which we are</span>
+<span class="sd">    simulating we can effectively remove this boundary, provided the solution</span>
+<span class="sd">    remains pulse-like and the width does not grow larger than we expect.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+
+        <span class="k">class</span><span class="w"> </span><span class="nc">SingleStepModifier</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+                <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">callback</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+                <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">SingleStepModifier</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -588,10 +808,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "/", "features": [], "search": "/assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
       
         <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       

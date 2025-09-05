@@ -1,5 +1,8 @@
 <!-- README.md -->
-+ [![cov](https://<you>.github.io/<repo>/badges/coverage.svg)](https://github.com/shawsa/odeiter/actions)
+![coverage](badges/coverage.svg)
+![tests](badges/tests.svg)
+
+[Documentation](https://shawsa.github.io/odeiter)
 
 # odeiter
 A Python package for time-integration of systems of differential equations using generators.
