@@ -867,11 +867,11 @@
 <p>Backward Differentiation (BDF) solvers are a family of implicit solvers that perform a single
 right-hand-side solve per time step and achieve high-order accuracy by
 storing the solution at several previous time steps.</p>
-<p>BDF methods are mult-step solvers and thus
+<p>BDF methods are multi-step solvers and thus
 require not only an initial condition, but also the solution at
-the first few time points dependeing on the order of the method.
+the first few time points depending on the order of the method.
 For example, BDF3 requires the solution at times <span class="arithmatex">\(t_0, t_0+k, t_0+2k\)</span>
-where <span class="arithmatex">\(t_0\)</span> is the inital time and <span class="arithmatex">\(k\)</span> is the temporal step-size.</p>
+where <span class="arithmatex">\(t_0\)</span> is the initial time and <span class="arithmatex">\(k\)</span> is the temporal step-size.</p>
 <p>This implementation assumes that you only have the solution at <span class="arithmatex">\(t_0\)</span>
 and accepts another time-integrator as a seed. For example, we may use
 <a href="../single_step/">RK4</a> (a single step method). You must also decide the
@@ -883,10 +883,10 @@ Adams-Moulton solver is an integer multiple.</p>
 Will use the initial condition and RK4 to take 8 time times steps
 each at half the step size. This will generate solutions at times
 <span class="arithmatex">\(t_0, t_0 + k/2, t_0 + k, t0 + 3k/2, ..., t_0 + 4k\)</span>.
-It will then subsample these as necessary to use as appropriate seed
+It will then sub-sample these as necessary to use as appropriate seed
 steps.</p>
 <p>It is important to ensure that the order of the seed method and the number
-of seed steps per step are at least as accurate as the orer of the
+of seed steps per step are at least as accurate as the order of the
 BDF method. For example
 <div class="highlight"><pre><span></span><code>solver = BDF5(RK4(), seed_steps_per_step=1)
 </code></pre></div>
