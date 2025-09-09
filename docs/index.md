@@ -51,7 +51,7 @@ condition. For example, the flowing animation shows two simulations created with
 ![](https://raw.githubusercontent.com/shawsa/odeiter/refs/heads/main/readme_media/looping_entrainment_demo.gif)
 
 The top simulation entrains so the solution (blue) rides the forcing function (magenta)
-indefinately, and achieves a stable traveling wave solution.
+indefinitely, and achieves a stable traveling wave solution.
 In the bottom simulation, the solution rides the forcing function for a while
 but in the end it does not entrain because the forcing function is too weak.
 I tested many amplitudes and simulated until either they reached a traveling pulse
