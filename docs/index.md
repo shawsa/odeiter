@@ -45,7 +45,7 @@ is no longer requried so it is discarded and the memory is reclaimed.
 
 Another advantage, is that generators are lazy. They don't compute the solution until
 you ask for it. This allows you to run simulations without a predetermined stoping
-condition. For example, the flowing animation shows two simulations created with
+condition. For example, the following animation shows two simulations created with
 `odeiter` where the difference is in the amplitudes of the forcing functions (magenta).
 
 ![](https://raw.githubusercontent.com/shawsa/odeiter/refs/heads/main/readme_media/looping_entrainment_demo.gif)
