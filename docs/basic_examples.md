@@ -40,7 +40,7 @@ for u in solver.solution_generator(u0, rhs, time):
 
 # Interactive Plotting
 
-This shows some of the flexibily by solving the system above, plotting
+This shows some of the flexibly by solving the system above, plotting
 the solution and plotting the error.
 
 The plotting occurs as the system is solved, rather than after it is solved
