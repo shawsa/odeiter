@@ -11,4 +11,4 @@ badge:
 	uv run genbadge coverage -o badges/coverage.svg
 
 deploy:
-	uv run mkdocs gh-depoly
+	uv run mkdocs gh-deploy
