@@ -9,3 +9,6 @@ badge:
 	uv run coverage report
 	uv run coverage xml -o reports/coverage/coverage.xml
 	uv run genbadge coverage -o badges/coverage.svg
+
+deploy:
+	uv run mkdocs gh-depoly
